@@ -21,12 +21,7 @@ from ..validators import MaxValueMultiFieldValidator, MinChoicesValidator, MaxCh
 
 
 class MultiSelectFormField(forms.MultipleChoiceField):
-    widget = forms.SelectMultiple(
-        widget=FilteredSelectMultiple(
-            "Seleccionar", is_stacked=False
-        ),
-        required=False
-    )
+    widget = forms.CheckboxSelectMultiple
     
     def __init__(self, *args, **kwargs):
         self.min_choices = kwargs.pop('min_choices', None)
