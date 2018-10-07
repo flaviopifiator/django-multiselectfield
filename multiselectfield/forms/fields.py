@@ -15,13 +15,18 @@
 # along with this programe.  If not, see <http://www.gnu.org/licenses/>.
 
 from django import forms
-
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from ..utils import get_max_length
 from ..validators import MaxValueMultiFieldValidator, MinChoicesValidator, MaxChoicesValidator
 
 
 class MultiSelectFormField(forms.MultipleChoiceField):
-    widget = forms.MultipleChoiceField
+    widget = forms.SelectMultiple(
+        widget=FilteredSelectMultiple(
+            "Seleccionar", is_stacked=False
+        ),
+        required=False
+    )
     
     def __init__(self, *args, **kwargs):
         self.min_choices = kwargs.pop('min_choices', None)
